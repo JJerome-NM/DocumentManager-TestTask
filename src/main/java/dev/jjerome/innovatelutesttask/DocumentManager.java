@@ -56,7 +56,7 @@ public class DocumentManager {
                     .toList();
 
             stream = stream.filter(document -> lowerCaseTitlePrefixes.stream()
-                    .anyMatch(p -> document.title.toLowerCase().startsWith(p)));
+                    .anyMatch(prefix -> document.title.toLowerCase().startsWith(prefix)));
         }
         if (Objects.nonNull(request.containsContents)) {
             List<String> lowerCaseContainsContents = request.containsContents.stream()
