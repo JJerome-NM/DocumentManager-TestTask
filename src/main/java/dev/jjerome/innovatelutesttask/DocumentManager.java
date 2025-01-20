@@ -51,10 +51,20 @@ public class DocumentManager {
         Stream<Document> stream = documents.values().stream();
 
         if (Objects.nonNull(request.titlePrefixes)) {
-            stream = stream.filter(document -> request.titlePrefixes.stream().anyMatch(p -> document.title.startsWith(p)));
+            List<String> lowerCaseTitlePrefixes = request.titlePrefixes.stream()
+                    .map(String::toLowerCase)
+                    .toList();
+
+            stream = stream.filter(document -> lowerCaseTitlePrefixes.stream()
+                    .anyMatch(p -> document.title.toLowerCase().startsWith(p)));
         }
         if (Objects.nonNull(request.containsContents)) {
-            stream = stream.filter(document -> request.containsContents.stream().anyMatch(content -> document.content.contains(content)));
+            List<String> lowerCaseContainsContents = request.containsContents.stream()
+                    .map(String::toLowerCase)
+                    .toList();
+
+            stream = stream.filter(document -> lowerCaseContainsContents.stream()
+                    .anyMatch(content -> document.content.toLowerCase().contains(content)));
         }
         if (Objects.nonNull(request.authorIds)){
             stream = stream.filter(document -> request.authorIds.contains(document.author.id));

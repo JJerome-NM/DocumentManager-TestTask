@@ -29,9 +29,9 @@ public class TestMainClass {
         manager.save(testDocument2);
 
         DocumentManager.SearchRequest searchRequest = DocumentManager.SearchRequest.builder()
-                .titlePrefixes(List.of(""))
+                .titlePrefixes(List.of("title"))
                 .authorIds(List.of(author.getId()))
-                .containsContents(List.of("lo"))
+                .containsContents(List.of("lorem"))
                 .createdFrom(LocalDateTime.of(2021, Month.OCTOBER, 1, 0, 0).toInstant(ZoneOffset.UTC))
                 .createdTo(LocalDateTime.of(2023, Month.APRIL, 1, 0, 0).toInstant(ZoneOffset.UTC))
                 .build();
